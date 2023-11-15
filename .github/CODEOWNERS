@@ -1,0 +1,13 @@
+# Code Owner Definitions
+
+# Global rule:
+
+* @ethndo
+
+# Backend
+
+/backend/** @ethndo
+
+# Frontend
+
+/frontend/** @ethndo @scoogii

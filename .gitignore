@@ -1,0 +1,24 @@
+# ---- FRONTEND ---- #
+.next
+
+node_modules
+
+# ---- BACKEND ---- #
+# Virtual Environment
+.venv/
+
+# Pycache
+*.pyc
+__pycache__/
+
+instance/
+
+# Pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Build
+dist/
+build/
+*.egg-info/

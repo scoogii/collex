@@ -1,0 +1,16 @@
+# Development
+Flask
+pydantic
+flasgger
+pyjwt
+flask-cors
+Flask-SQLAlchemy
+pytz
+
+# Testing
+coverage
+requests
+pytest
+
+# Style
+black

@@ -1,0 +1,1 @@
+docker exec -it collex-backend python run_tests.py

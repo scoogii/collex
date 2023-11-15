@@ -1,0 +1,58 @@
+# Test and Lint code on Pull Request
+
+name: Test & Lint
+
+on:
+    pull_request:
+        branches:
+            - main
+
+jobs:
+    build-and-test:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            pull-requests: write
+        steps:
+            # Checks out repository under $GITHUB_WORKSPACE, so your job can access it
+            - name: Checkout Code
+              uses: actions/checkout@v2
+
+            # Build the Docker Image
+            - name: Build Docker Image
+              run: docker build -t collex-backend -f backend/Dockerfile backend
+
+            # Run tests inside Docker container
+            - name: Test Docker Image
+              run: |
+                docker run --name test-container collex-backend python run_tests.py
+                docker cp test-container:/app/coverage.xml ./coverage.xml
+                
+            # Install Python Black
+            - name: Install Python Black
+              run: pip install black
+
+            # Format code using Python Black
+            - name: Format code with Python Black
+              run: black .
+            
+            - name: Check for changes
+              id: check_changes
+              run: git diff --exit-code || echo "Code changes detected"
+
+            - name: Commit changes
+              if: steps.check_changes.outputs.result == 'Code changes detected'
+              run: |
+                git config user.name "${{ github.actor }}"
+                git config user.email "${{ github.actor }}@users.noreply.github.com"
+                git add .
+                git commit -m "Auto-format code with Black"
+                git push
+                
+            # Get Pytest Code Coverage
+            - name: Check coverage
+              uses: orgoro/coverage@v3.1
+              with:
+                coverageFile: ./coverage.xml
+                token: ${{ secrets.GITHUB_TOKEN }}
+                thresholdAll: 0

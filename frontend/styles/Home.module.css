@@ -1,0 +1,58 @@
+.main {
+  display: flex;
+  gap: 30px;
+  padding: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-image: url("/collex_background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.backgroundImage {
+  background-image: url("/collex_background.png");
+}
+
+.scaleButton {
+  transition: transform 0.1s;
+}
+
+.scaleButton:hover {
+  transform: scale(1.05);
+}
+
+.hoverPurple {
+  transition: transform 0.1s;
+}
+
+.hoverPurple:hover {
+  transform: scale(1.05);
+  color: #8c52ff;
+}
+
+.scaleLoop {
+  animation: scalest 2s infinite linear;
+}
+
+@keyframes scalest {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.selectButton {
+  transition: ease-in-out all 0.1s;
+  transform: scale(1);
+}
+
+.selectButton:active {
+  transform: scale(0.9);
+}
